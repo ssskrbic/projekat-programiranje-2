@@ -24,6 +24,35 @@ class TestLibrary(unittest.TestCase):
         expected = "Naslov: Lovac u zitu, Autor: Dzerom Selindzer, Godina: 1951, Žanr: novela\n" \
                    "Naslov: Put oko sveta za 80 dana, Autor: Zil Vern, Godina: 1872, Žanr: fikcija"
         self.assertEqual(result, expected)
+        
+    def test_search_books_by_title(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        results = self.library.search_books(title="Lovac u zitu")
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].title, "Lovac u zitu")
 
+    def test_search_books_by_author(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        results = self.library.search_books(author="Dzerom Selindzer")
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].author, "Dzerom Selindzer")
+
+    def test_search_books_by_year(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        results = self.library.search_books(year=1951)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].year, 1951)
+
+    def test_search_books_by_genre(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        results = self.library.search_books(genre="novela")
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].genre, "novela")
+
+    def test_search_books_no_match(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        results = self.library.search_books(title="knjiga ne postoji")
+        self.assertEqual(len(results), 0)
+        
 if __name__ == "__main__":
     unittest.main()

@@ -18,3 +18,13 @@ class Library:
             for book in self.books:
                 books_info.append(f"Naslov: {book.title}, Autor: {book.author}, Godina: {book.year}, Žanr: {book.genre}")
             return "\n".join(books_info)
+    
+    def search_books(self, title=None, author=None, year=None, genre=None):
+        results = []
+        for book in self.books:
+            if (title and book.title == title) or \
+               (author and book.author == author) or \
+               (year and book.year == year) or \
+               (genre and book.genre == genre):
+                results.append(book)
+        return results
