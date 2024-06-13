@@ -9,7 +9,8 @@ def main():
         print("2. Pretraži knjige")
         print("3. Prikaz svih knjiga")
         print("4. Izmeni knjigu")
-        print("5. Izlaz")
+        print("5. Obriši knjigu")
+        print("6. Izlaz")
         izbor = input("Izaberite opciju: ")
 
         if izbor == "1":
@@ -47,7 +48,16 @@ def main():
                 print("Informacije o knjizi su uspešno izmenjene!")
             else:
                 print("Knjiga sa navedenim naslovom nije pronađena.")
+                
         elif izbor == "5":
+            title = input("Unesite naslov knjige koju želite da obrišete: ")
+            success = library.delete_book(title)
+            if success:
+                print("Knjiga je uspešno obrisana!")
+            else:
+                print("Knjiga sa navedenim naslovom nije pronađena.")
+        
+        elif izbor == "6":
             break
         else:
             print("Nepoznata opcija. Pokušajte ponovo.")

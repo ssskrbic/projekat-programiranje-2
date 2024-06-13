@@ -42,3 +42,10 @@ class Library:
                     book.genre = new_genre
                 return True
         return False
+    
+    def delete_book(self, title):
+        for book in self.books:
+            if book.title == title:
+                self.books.remove(book)
+                return True
+        return False

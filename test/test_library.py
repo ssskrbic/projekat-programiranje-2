@@ -66,5 +66,16 @@ class TestLibrary(unittest.TestCase):
         success = self.library.edit_book("nepostojeca knjiga", new_title="New Title")
         self.assertFalse(success)
         
+    def test_delete_book(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        success = self.library.delete_book("Lovac u zitu")
+        self.assertTrue(success)
+        self.assertEqual(len(self.library.books), 0)
+
+    def test_delete_book_no_match(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        success = self.library.delete_book("nepostojeca knjiga")
+        self.assertFalse(success)
+        
 if __name__ == "__main__":
     unittest.main()
