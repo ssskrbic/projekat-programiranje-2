@@ -54,5 +54,17 @@ class TestLibrary(unittest.TestCase):
         results = self.library.search_books(title="knjiga ne postoji")
         self.assertEqual(len(results), 0)
         
+    def test_edit_book(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        success = self.library.edit_book("Lovac u zitu", new_title="Na Drini cuprija", new_year=1945)
+        self.assertTrue(success)
+        self.assertEqual(self.library.books[0].title, "Na Drini cuprija")
+        self.assertEqual(self.library.books[0].year, 1945)
+
+    def test_edit_book_no_match(self):
+        self.library.add_book("Lovac u zitu", "Dzerom Selindzer", 1951, "novela")
+        success = self.library.edit_book("nepostojeca knjiga", new_title="New Title")
+        self.assertFalse(success)
+        
 if __name__ == "__main__":
     unittest.main()

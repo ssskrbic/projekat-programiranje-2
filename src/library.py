@@ -28,3 +28,17 @@ class Library:
                (genre and book.genre == genre):
                 results.append(book)
         return results
+    
+    def edit_book(self, old_title, new_title=None, new_author=None, new_year=None, new_genre=None):
+        for book in self.books:
+            if book.title == old_title:
+                if new_title:
+                    book.title = new_title
+                if new_author:
+                    book.author = new_author
+                if new_year:
+                    book.year = new_year
+                if new_genre:
+                    book.genre = new_genre
+                return True
+        return False
